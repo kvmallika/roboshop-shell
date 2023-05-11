@@ -23,6 +23,7 @@ cd /app
 echo -e "\e[31m ***** installing dependencies ***** \e[31m"
 npm install
 
+echo "test"
 echo -e "\e[31m ***** coping catalogue service files ***** \e[31m"
 cp //home//centos//roboshop-shell//catalogue.service  //etc//systemd//system//catalogue.service
 
