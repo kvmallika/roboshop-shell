@@ -33,7 +33,7 @@ systemctl enable catalogue
 systemctl start catalogue
 
 echo -e "\e[31m ***** coping mongodb repo files ***** \e[31m"
-cp mongo.repo //etc//yum.repos.d//mongo.repo
+cp //home//centos//roboshop-shell//mongo.repo //etc//yum.repos.d//mongo.repo
 
 echo -e "\e[31m ***** installing mongodb client ***** \e[31m"
 yum install mongodb-org-shell -y
