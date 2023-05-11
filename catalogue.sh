@@ -24,7 +24,7 @@ echo -e "\e[31m ***** installing dependencies ***** \e[31m"
 npm install
 
 echo -e "\e[31m ***** coping catalogue service files ***** \e[31m"
-cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service
+cp //home//centos//roboshop-shell//catalogue.service  //etc//systemd//system//catalogue.service
 
 echo -e "\e[31m ***** starting catalogue service ***** \e[31m"
 systemctl daemon-reload
