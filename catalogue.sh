@@ -29,7 +29,7 @@ cp //home//centos//roboshop-shell//catalogue.service  /etc/systemd/system/catalo
 echo -e "\e[31m ***** starting catalogue service ***** \e[0m"
 systemctl daemon-reload
 systemctl enable catalogue
-systemctl start catalogue
+systemctl restart catalogue
 
 echo -e "\e[31m ***** coping mongodb repo files ***** \e[0m"
 cp //home//centos//roboshop-shell//mongo.repo /etc/yum.repos.d/mongo.repo
