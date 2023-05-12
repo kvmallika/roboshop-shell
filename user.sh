@@ -22,7 +22,7 @@ cd /app
 echo -e "\e[31m ***** installing dependencies ***** \e[0m"
 npm install
 
-cho -e "\e[31m ***** coping user service files ***** \e[0m"
+echo -e "\e[31m ***** coping user service files ***** \e[0m"
 cp //home//centos//roboshop-shell//user.service /etc/systemd/system/user.service
 
 echo -e "\e[31m ***** starting user service ***** \e[0m"
