@@ -1,8 +1,12 @@
+script=$(realpath "$0")
+script_path=$(dirname "$script")
+source ${script_path}/common.sh
+
 echo -e "\e[31m ***** install maven ***** \e[0m"
 yum install maven -y
 
 echo -e "\e[31m ***** adding application user ***** \e[0m"
-useradd roboshop
+useradd ${app_user}
 
 echo -e "\e[31m ***** setting app directory ***** \e[0m"
 rm -rf /app
@@ -19,7 +23,7 @@ mvn clean package
 mv target/shipping-1.0.jar shipping.jar
 
 echo -e "\e[31m ***** setting up the systemD files ***** \e[0m"
-cp //home//centos//roboshop-shell//shipping.service /etc/systemd/system/shipping.service
+cp ${script_path}//shipping.service /etc/systemd/system/shipping.service
 
 echo -e "\e[31m ***** enable and starting the shipping service  ***** \e[0m"
 systemctl daemon-reload

@@ -1,3 +1,7 @@
+script=$(realpath "$0")
+script_path=$(dirname "$script")
+source ${script_path}/common.sh
+
 echo -e "\e[31m ***** NodeJS repo files ***** \e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
@@ -5,7 +9,7 @@ echo -e "\e[31m ***** Install NodeJS ***** \e[0m"
 yum install nodejs -y
 
 echo -e "\e[31m ***** adding application user ***** \e[0m"
-useradd roboshop
+useradd ${app_user}
 
 echo -e "\e[31m ***** creating app directory ***** \e[0m"
 rm -rf /app
@@ -23,15 +27,15 @@ echo -e "\e[31m ***** installing dependencies ***** \e[0m"
 npm install
 
 echo -e "\e[31m ***** coping user service files ***** \e[0m"
-cp //home//centos//roboshop-shell//user.service /etc/systemd/system/user.service
+cp ${script_path}//user.service /etc/systemd/system/user.service
 
 echo -e "\e[31m ***** starting user service ***** \e[0m"
 systemctl daemon-reload
 systemctl enable user
-systemctl start user
+systemctl restart user
 
 echo -e "\e[31m ***** coping mongodb repo files ***** \e[0m"
-cp //home//centos//roboshop-shell//mongo.repo /etc/yum.repos.d/mongo.repo
+cp ${script_path}//mongo.repo /etc/yum.repos.d/mongo.repo
 
 echo -e "\e[31m ***** installing mongodb client ***** \e[0m"
 yum install mongodb-org-shell -y

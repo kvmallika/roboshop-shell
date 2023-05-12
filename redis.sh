@@ -1,3 +1,6 @@
+script=$(realpath "$0")
+script_path=$(dirname "$script")
+source ${script_path}/common.sh
 
 echo -e "\e[31m ***** install redis repo files ***** \e[0m"
 yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
@@ -13,4 +16,4 @@ sed -i -e 's|127.0.0.1|0.0.0.0|' /etc/redis.conf /etc/redis/redis.conf
 
 echo -e "\e[31m ***** start and enable redis service ***** \e[0m"
 systemctl enable redis
-systemctl start redis
+systemctl restart redis

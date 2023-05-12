@@ -1,8 +1,12 @@
+script=$(realpath "$0")
+script_path=$(dirname "$script")
+source ${script_path}/common.sh
+
 echo -e "\e[31m ***** Installing Python  ***** \e[0m"
 yum install python36 gcc python3-devel -y
 
 echo -e "\e[31m ***** adding application user ***** \e[0m"
-useradd roboshop
+useradd ${app_user}
 
 echo -e "\e[31m ***** creating the app directory ***** \e[0m"
 rm -rf /app
@@ -18,9 +22,9 @@ cd /app
 pip3.6 install -r requirements.txt
 
 echo -e "\e[31m ***** setup systemD payment service ***** \e[0m"
-cp //home//centos//roboshop-shell//payment.service /etc/systemd/system/payment.service
+cp ${script_path}//payment.service /etc/systemd/system/payment.service
 
 echo -e "\e[31m ***** start and enable payment service ***** \e[0m"
 systemctl daemon-reload
 systemctl enable payment
-systemctl start payment
+systemctl restart payment
