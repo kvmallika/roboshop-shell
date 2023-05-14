@@ -1,6 +1,12 @@
 script=$(realpath "$0")
 script_path=$(dirname "$script")
 source ${script_path}/common.sh
+rabitmq_appuser_password=$1
+
+if[ -z "$rabitmq_appuser_password" ]; then
+  echo input RabbitMQ appuser password is missing
+  exit
+fi
 
 echo -e "\e[31m ***** config. YUM repos ***** \e[0m"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
