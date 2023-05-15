@@ -1,5 +1,18 @@
 app_user=roboshop
 
+schema_setup() {
+  if [ "schema_setup" == "mongo" ]; then
+
+echo -e "\e[31m ***** coping mongodb repo files ***** \e[0m"
+cp ${script_path}//mongo.repo /etc/yum.repos.d/mongo.repo
+
+echo -e "\e[31m ***** installing mongodb client ***** \e[0m"
+yum install mongodb-org-shell -y
+
+echo -e "\e[31m ***** load schema ***** \e[0m"
+mongo --host mongodb-dev.vemdevops.online </app/schema/${component}.js
+ fi
+}
 func_nodejs()
 {
 echo -e "\e[31m ***** NodeJS repo files ***** \e[0m"
@@ -33,4 +46,7 @@ echo -e "\e[31m ***** starting catalogue service ***** \e[0m"
 systemctl daemon-reload
 systemctl enable ${component}
 systemctl restart ${component}
+
+schema_setup
+
 }
