@@ -73,7 +73,7 @@ func_java()
 
   func_print_head "download the dependencies & build the application"
   mvn clean package
-  mv target/shipping-1.0.jar shipping.jar
+  mv target/${component}-1.0.jar ${component}.jar
 
 
   func_schema_setup
