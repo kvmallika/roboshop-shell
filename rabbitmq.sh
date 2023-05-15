@@ -1,9 +1,9 @@
 script=$(realpath "$0")
 script_path=$(dirname "$script")
 source ${script_path}/common.sh
-rabitmq_appuser_password=$1
+rabbitmq_appuser_password=$1
 
-if[ -z "$rabitmq_appuser_password" ]; then
+if [ -z "$rabitmq_appuser_password" ]; then
   echo input RabbitMQ appuser password is missing
   exit
 fi
@@ -25,6 +25,6 @@ systemctl enable rabbitmq-server
 systemctl restart rabbitmq-server
 
 echo -e "\e[31m ***** Creating user for the application ***** \e[0m"
-rabbitmqctl add_user roboshop roboshop123
+rabbitmqctl add_user roboshop ${rabbitmq_appuser_password}
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
 
