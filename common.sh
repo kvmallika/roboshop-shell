@@ -77,5 +77,7 @@ func_java()
 
 
   func_schema_setup
+  echo setup done
   func_systemd_setup
+  echo complete the preocess
 }
