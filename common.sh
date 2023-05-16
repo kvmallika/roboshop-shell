@@ -45,7 +45,7 @@ func_app_prereq()
     func_print_head "adding application user"
     id ${app_user} &>>$log_file
 
-    if [ $1 -ne 0 ]; then
+    if [ $? -ne 0 ]; then
       useradd ${app_user}
     fi
     func_stat_check $?
