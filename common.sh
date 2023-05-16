@@ -67,8 +67,8 @@ func_systemd_setup(){
     cp ${script_path}//${component}.service  /etc/systemd/system/${component}.service &>>$log_file
     func_stat_check $?
 
-    func_print_head "starting catalogue service"
-    systemctl daemon-reload
+    func_print_head "starting systemd service"
+    systemctl daemon-reload &>>$log_file
     systemctl enable ${component}
     systemctl restart ${component}
 
