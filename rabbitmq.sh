@@ -13,7 +13,7 @@ curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.
 func_stat_check $?
 
 func_print_head "Install Erlang"
-yum install erlang -y
+yum install erlang -y &>>$log_file
 func_stat_check $?
 
 func_print_head "Configure YUM repos for RabbitMQ"
@@ -30,6 +30,6 @@ systemctl restart rabbitmq-server
 func_stat_check $?
 
 func_print_head "Creating user for the application"
-rabbitmqctl add_user roboshop ${rabbitmq_appuser_password}
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+rabbitmqctl add_user roboshop ${rabbitmq_appuser_password} &>>$log_file
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$log_file
 func_stat_check $?
