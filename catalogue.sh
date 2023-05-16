@@ -5,4 +5,6 @@ component=catalogue
 
 func_nodejs
 schema_setup=mongo
+func_schema_setup
+
 
