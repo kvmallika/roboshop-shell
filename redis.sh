@@ -2,18 +2,23 @@ script=$(realpath "$0")
 script_path=$(dirname "$script")
 source ${script_path}/common.sh
 
-echo -e "\e[31m ***** install redis repo files ***** \e[0m"
-yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
+func_print_head "install redis repo files"
+yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>>$log_file
+func_stat_check $?
 
-cho -e "\e[31m ***** enable the packages ***** \e[0m"
-dnf module enable redis:remi-6.2 -y
+func_print_head "enable the packages"
+dnf module enable redis:remi-6.2 -y &>>$log_file
+func_stat_check $?
 
-echo -e "\e[31m ***** Install redis ***** \e[0m"
-yum install redis -y
+func_print_head "Install redis"
+yum install redis -y &>>$log_file
+func_stat_check $?
 
-echo -e "\e[31m ***** updating the listen address ***** \e[0m"
-sed -i -e 's|127.0.0.1|0.0.0.0|' /etc/redis.conf /etc/redis/redis.conf
+func_print_head "updating the listen address"
+sed -i -e 's|127.0.0.1|0.0.0.0|' /etc/redis.conf /etc/redis/redis.conf &>>$log_file
+func_stat_check $?
 
-echo -e "\e[31m ***** start and enable redis service ***** \e[0m"
+func_print_head "start and enable redis service"
 systemctl enable redis
 systemctl restart redis
+func_stat_check $?
