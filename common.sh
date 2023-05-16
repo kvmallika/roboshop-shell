@@ -15,7 +15,7 @@ func_stat_check(){
   fi
 }
 func_schema_setup() {
-  if [ "schema_setup" == "mongo" ]; then
+  if [ "$schema_setup" == "mongo" ]; then
 
     func_print_head "coping mongodb repo files"
     cp ${script_path}//mongo.repo /etc/yum.repos.d/mongo.repo &>>$log_file
@@ -29,7 +29,7 @@ func_schema_setup() {
     mongo --host mongodb-dev.vemdevops.online </app/schema/${component}.js &>>$log_file
     func_stat_check $?
  fi
- if [ "schema_setup" == "mysql" ]; then
+ if [ "$schema_setup" == "mysql" ]; then
      func_print_head "install MySQL client"
      yum install mysql -y &>>$log_file
      func_stat_check $?
