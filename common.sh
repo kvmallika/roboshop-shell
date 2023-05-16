@@ -69,8 +69,9 @@ func_systemd_setup(){
 
     func_print_head "starting systemd service"
     systemctl daemon-reload &>>$log_file
-    systemctl enable ${component}
-    systemctl restart ${component}
+    systemctl enable ${component} &>>$log_file
+    systemctl restart ${component} &>>$log_file
+    func_stat_check $?
 
 }
 func_nodejs()
