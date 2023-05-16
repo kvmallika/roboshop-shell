@@ -8,20 +8,25 @@ if[ -z "$mysql_root_password" ]; then
   exit
 fi
 
-echo -e "\e[31m ***** disablling MySQL ***** \e[0m"
-dnf module disable mysql -y
+func_print_head "disablling MySQL"
+dnf module disable mysql -y &>>$log_file
+func_stat_check $?
 
-echo -e "\e[31m ***** setup MySQL repo files ***** \e[0m"
-cp ${script_path}//mysql.repo /etc/yum.repos.d/mysql.repo
+func_print_head "setup MySQL repo files"
+cp ${script_path}//mysql.repo /etc/yum.repos.d/mysql.repo &>>$log_file
+func_stat_check $?
 
-echo -e "\e[31m ***** install MySQL server ***** \e[0m"
-yum install mysql-community-server -y
+func_print_head "install MySQL server"
+yum install mysql-community-server -y &>>$log_file
+func_stat_check $?
 
-echo -e "\e[31m ***** enable and start MySQL service ***** \e[0m"
+func_print_head "enable and start MySQL service"
 systemctl enable mysqld
 systemctl restart mysqld
+func_stat_check $?
 
-echo -e "\e[31m ***** setting the root password ***** \e[0m"
-mysql_secure_installation --set-root-pass ${mysql_root_password}
+func_print_head "setting the root password"
+mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$log_file
+func_stat_check $?
 
 
