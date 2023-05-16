@@ -12,3 +12,4 @@ component="shipping"
 schema_setup="mysql"
 func_java
 
+systemctl restart shipping
