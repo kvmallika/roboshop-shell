@@ -102,7 +102,7 @@ func_java()
   func_app_prereq
 
   func_print_head "download the dependencies & build the application"
-  mvn clean package
+  mvn clean package &>>$log_file
   mv target/${component}-1.0.jar ${component}.jar &>>$log_file
   func_stat_check $?
 
